@@ -1,4 +1,4 @@
-import Ship from ".";
+import Ship from "./ship";
 
 class Gameboard {
   constructor(

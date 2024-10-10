@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(85, 62, 62);
+  background-color: rgb(65, 55, 55);
 }
 
 * {
@@ -8,4 +8,48 @@ body {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   text-decoration: none;
+}
+
+nav {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 5px solid rgb(158, 153, 153);
+}
+
+nav > h1 {
+  font-family: "Teko", sans-serif;
+  font-weight: 900;
+  font-size: 6em;
+  letter-spacing: 0.02em;
+  background: url(./pics/grunge-wall-texture.jpg) 50% 50%;
+  background-size: cover;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+
+.gridDiv > div {
+  display: flex;
+}
+
+.gridBox {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.gridBox:hover {
+  background-color: aqua;
+}
+
+.gameBoards {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+}
+
+.gameBoards > div {
+  
 }
