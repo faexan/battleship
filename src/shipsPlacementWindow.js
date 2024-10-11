@@ -1,5 +1,39 @@
 import { createGrid } from "./loadBoards";
 
+function inputColorControl(div, color) {
+  const targetDivId = div.id.slice(10);
+  const remainingBoxes = Number(targetDivId[1]);
+  const shipLength = 5;
+  if (shipLength - remainingBoxes >= 0) {
+    for (let i = 0; i < shipLength; i += 1) {
+      const string = Number(targetDivId);
+      if (string <= 9) {
+        const box = document.querySelector(`#inputBoard0${string + i}`);
+        box.style.backgroundColor = color;
+      } else {
+        const box = document.querySelector(`#inputBoard${string + i}`);
+        box.style.backgroundColor = color;
+      }
+    }
+  }
+}
+
+function placeShips() {
+  const inputDivs = document.querySelectorAll(".inputBoard");
+
+  inputDivs.forEach((div) => {
+    div.addEventListener("mouseenter", () => {
+      inputColorControl(div, "yellow");
+    });
+    div.addEventListener("mouseleave", () => {
+      inputColorControl(div, "transparent");
+    });
+    div.addEventListener("click", () => {
+      inputColorControl(div, "yellow");
+    });
+  });
+}
+
 function placementPage() {
   const screen = document.querySelector(".container");
   const shipsDiv = document.createElement("div");
@@ -28,21 +62,6 @@ function placementPage() {
   container.appendChild(shipsDiv);
   screen.appendChild(container);
   placeShips();
-}
-
-function placeShips() {
-  const inputDivs = document.querySelectorAll(".inputBoard");
-
-  inputDivs.forEach((div) => {
-    div.addEventListener("mouseenter", () => {
-      const divID = Number(div.id.slice(10));
-
-
-
-
-
-    });
-  });
 }
 
 export default placementPage;

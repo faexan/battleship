@@ -5,8 +5,6 @@ import placementPage from "./shipsPlacementWindow";
 
 placementPage();
 
-
-
 const startGameBtn = document.querySelector(".startGameBtn");
 
 startGameBtn.addEventListener("click", () => {
