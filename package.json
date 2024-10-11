@@ -6,6 +6,7 @@
     "test": "jest",
     "build": "webpack",
     "dev": "webpack serve",
+    "watch": "webpack --watch",
     "deploy": "git subtree push --prefix dist origin gh-pages",
     "write": "prettier . --write",
     "lintf": "eslint ./src/ --fix"

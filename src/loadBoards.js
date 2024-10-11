@@ -1,6 +1,6 @@
-const boardsDiv = document.querySelector(".gameBoards");
+const boardsContainer = document.querySelector(".gameBoards");
 
-function createGrid(player) {
+function createGrid(player, boardsDiv) {
   const gridDiv = document.createElement("div");
   gridDiv.classList.add("gridDiv");
   for (let i = 0; i < 10; i += 1) {
@@ -17,7 +17,7 @@ function createGrid(player) {
 }
 
 function loadBoards() {
-  createGrid("p1");
-  createGrid("p2");
+  createGrid("p1", boardsContainer);
+  createGrid("p2", boardsContainer);
 }
-export default loadBoards;
+export { loadBoards, createGrid };

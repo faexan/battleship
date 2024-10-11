@@ -29,7 +29,6 @@ nav > h1 {
   -webkit-background-clip: text;
 }
 
-
 .gridDiv > div {
   display: flex;
 }
@@ -51,5 +50,4 @@ nav > h1 {
 }
 
 .gameBoards > div {
-  
 }
