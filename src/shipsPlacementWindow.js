@@ -1,18 +1,36 @@
 import { createGrid } from "./loadBoards";
 
-function inputColorControl(div, color) {
+function checkBoxStatus(arr, id) {
+  return arr.filter((elem) => {
+    return elem === id;
+  });
+}
+
+const clickedBoxesArr = [];
+function inputColorControl(div, color, event) {
+  if (event === "click") {
+    clickedBoxesArr.push(div.id);
+  }
+  const idArr = checkBoxStatus(clickedBoxesArr, div.id);
   const targetDivId = div.id.slice(10);
   const remainingBoxes = Number(targetDivId[1]);
   const shipLength = 5;
   if (shipLength - remainingBoxes >= 0) {
     for (let i = 0; i < shipLength; i += 1) {
-      const string = Number(targetDivId);
-      if (string <= 9) {
-        const box = document.querySelector(`#inputBoard0${string + i}`);
-        box.style.backgroundColor = color;
-      } else {
-        const box = document.querySelector(`#inputBoard${string + i}`);
-        box.style.backgroundColor = color;
+      if (
+        (color === "transparent" && idArr.length !== 1) ||
+        color === "yellow"
+      ) {
+        const string = Number(targetDivId);
+        if (string <= 9) {
+          const box = document.querySelector(`#inputBoard0${string + i}`);
+
+          box.style.backgroundColor = color;
+        } else {
+          const box = document.querySelector(`#inputBoard${string + i}`);
+
+          box.style.backgroundColor = color;
+        }
       }
     }
   }
@@ -22,14 +40,17 @@ function placeShips() {
   const inputDivs = document.querySelectorAll(".inputBoard");
 
   inputDivs.forEach((div) => {
-    div.addEventListener("mouseenter", () => {
-      inputColorControl(div, "yellow");
-    });
-    div.addEventListener("mouseleave", () => {
-      inputColorControl(div, "transparent");
-    });
+    const mouseEnterHandler = () => inputColorControl(div, "yellow");
+    const mouseLeaveHandler = () => inputColorControl(div, "transparent");
+
+    div.addEventListener("mouseenter", mouseEnterHandler);
+    div.addEventListener("mouseleave", mouseLeaveHandler);
+
     div.addEventListener("click", () => {
-      inputColorControl(div, "yellow");
+      inputColorControl(div, "yellow", "click");
+
+      div.removeEventListener("mouseenter", mouseEnterHandler);
+      div.removeEventListener("mouseleave", mouseLeaveHandler);
     });
   });
 }
