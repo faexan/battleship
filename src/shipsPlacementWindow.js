@@ -6,8 +6,20 @@ function checkBoxStatus(arr, id) {
   });
 }
 
+function neutralizeBoxes(ids, event, mouseEnterHandler, mouseLeaveHandler) {
+  const box = document.querySelector(ids);
+  box.removeEventListener(mouseEnterHandler);
+  box.removeEventListener(mouseLeaveHandler);
+}
+
 const clickedBoxesArr = [];
-function inputColorControl(div, color, event) {
+function inputColorControl(
+  div,
+  color,
+  event,
+  mouseEnterHandler,
+  mouseLeaveHandler,
+) {
   if (event === "click") {
     clickedBoxesArr.push(div.id);
   }
@@ -24,12 +36,28 @@ function inputColorControl(div, color, event) {
         const string = Number(targetDivId);
         if (string <= 9) {
           const box = document.querySelector(`#inputBoard0${string + i}`);
+          if (event === "click") {
+            for (let j = shipLength; j > 0; j -= 1) {
+              const bx = document.querySelector(`#inputBoard0${string - j}`);
+              if (bx) {
+                neutralizeBoxes(bx, mouseEnterHandler, mouseLeaveHandler);
+              }
+            }
+          }
 
           box.style.backgroundColor = color;
         } else {
           const box = document.querySelector(`#inputBoard${string + i}`);
 
           box.style.backgroundColor = color;
+          if (event === "click") {
+            for (let j = shipLength; j > 0; j -= 1) {
+              const bx = document.querySelector(`#inputBoard0${string - j}`);
+              if (bx) {
+                neutralizeBoxes(bx, mouseEnterHandler, mouseLeaveHandler);
+              }
+            }
+          }
         }
       }
     }
@@ -47,8 +75,13 @@ function placeShips() {
     div.addEventListener("mouseleave", mouseLeaveHandler);
 
     div.addEventListener("click", () => {
-      inputColorControl(div, "yellow", "click");
-
+      inputColorControl(
+        div,
+        "yellow",
+        "click",
+        mouseEnterHandler,
+        mouseEnterHandler,
+      );
       div.removeEventListener("mouseenter", mouseEnterHandler);
       div.removeEventListener("mouseleave", mouseLeaveHandler);
     });
